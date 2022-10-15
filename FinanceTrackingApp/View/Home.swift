@@ -42,6 +42,7 @@ struct Home: View {
                     }
                 }
                 ExpenseCardView()
+                TransactionsView()
             }
             .padding()
         }
@@ -49,6 +50,25 @@ struct Home: View {
             Color("BG")
                 .ignoresSafeArea()
         }
+    }
+    
+    // Transaction View
+    @ViewBuilder
+    func TransactionsView()->some View {
+        VStack(spacing: 15) {
+            Text("Transactions")
+                .font(.title2.bold())
+                    .frame(maxWidth: .infinity,alignment: .leading)
+                .opacity(0.7)
+            
+            ForEach(expenseViewModel.expenses) { expense in
+                // Transaction Card View
+                TransactionCardView(expense: expense)
+                    .environmentObject(expenseViewModel)
+                
+            }
+        }
+        .padding(.top)
     }
     
     // MARK: Expense Gradient CardView
