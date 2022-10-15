@@ -58,9 +58,9 @@ struct Home: View {
             RoundedRectangle(cornerRadius: 20, style: .continuous)
                 .fill(
                     .linearGradient(colors: [
-                    Color("Gradient1"),
-                    Color("Gradient2"),
-                    Color("Gradient3")
+                        Color(.white),
+                        Color(.blue),
+                        Color(.red)
                     ], startPoint: .topLeading, endPoint: .bottomTrailing)
                 )
             
@@ -77,6 +77,39 @@ struct Home: View {
                     .lineLimit(1)
                     .padding(.bottom, 5)
                 }
+                .offset(y: -10)
+                
+                HStack(spacing :15) {
+                    Image(systemName: "arrow.down")
+                        .font(.caption.bold())
+                        .foregroundColor(Color("Green"))
+                        .frame(width: 30,  height: 30)
+                        .background(.white.opacity(0.7), in: Circle())
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Expenses")
+                            .font(.caption)
+                            .opacity(0.7)
+                        
+                        Image(systemName: "arrow.up")
+                            .font(.caption.bold())
+                            .foregroundColor(Color("Red"))
+                            .frame(width: 30,  height: 30)
+                            .background(.white.opacity(0.7), in: Circle())
+                        
+                        Text(expenseViewModel
+                            .convertExpensesToCurrency(expenses: expenseViewModel.expenses, type: .income))
+                        .font(.callout)
+                        .fontWeight(.semibold)
+                        .lineLimit(1)
+                        .fixedSize()
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                }
+                .padding(.horizontal)
+                .padding(.trailing)
+                .offset(y: 15)
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
