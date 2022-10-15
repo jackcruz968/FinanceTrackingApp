@@ -67,8 +67,19 @@ struct Home: View {
             VStack(spacing: 15) {
                 VStack(spacing: 15) {
                     // MARK: Currenly Going Month Date String
+                    Text(expenseViewModel.currentMonthDateString())
+                        .font(.callout)
+                        .fontWeight(.semibold)
+                    // Current Month Expenses Price
+                    Text(expenseViewModel
+                        .convertExpensesToCurrency(expenses: expenseViewModel.expenses))
+                    .font(.system(size: 35, weight: .bold))
+                    .lineLimit(1)
+                    .padding(.bottom, 5)
                 }
             }
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
         .frame(height: 220)
         .padding(.top)
