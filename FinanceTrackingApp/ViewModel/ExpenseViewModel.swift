@@ -32,9 +32,14 @@ class ExpenseViewModel: ObservableObject {
     func convertExpensesToCurrency(expenses: [Expense], type: ExpenseType = .all)->String {
         var value: Double = 0
         value = expenses.reduce(0, { partialResult, expense in
-            return partialResult + ( expense.type == .all ? (expense.type == .income ? expense.amount : -expense.amount) : (expense.type == type ? expense.amount : 0))
+            return partialResult + ( type == .all ? (expense.type == .income ? expense.amount : -expense.amount) : (expense.type == type ? expense.amount : 0))
         })
         
+        return convertNumberToPrice(value: value)
+    }
+    
+    // Converting Number To Price
+    func convertNumberToPrice(value: Double)->String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         
